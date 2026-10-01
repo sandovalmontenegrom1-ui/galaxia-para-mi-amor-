@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mi galaxia para ti 💙</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    background: radial-gradient(circle at center, #15104a 0%, #050510 45%, #000 100%);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.galaxia {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Estrellas */
+.estrella {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: brillar 2s infinite alternate;
+}
+
+@keyframes brillar {
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+/* Planeta */
+.planeta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #8e7dff, #3925a8 50%, #100633);
+    box-shadow:
+        0 0 30px #806cff,
+        0 0 70px #5035d9,
+        inset -25px -20px 40px #050014;
+    animation: flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%,100% {
+        transform: translate(-50%, -50%);
+    }
+
+    50% {
+        transform: translate(-50%, -55%);
+    }
+}
+
+/* Anillo */
+.anillo {
+    position: absolute;
+    width: 280px;
+    height: 70px;
+    border: 4px solid rgba(190,180,255,.7);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+/* Texto */
+.contenido {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px #b7a9ff;
+}
+
+#mensaje {
+    font-size: 18px;
+    min-height: 55px;
+    text-shadow: 0 0 10px white;
+    padding: 0 20px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #806cff;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 0 20px #806cff;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+/* Corazones */
+.corazon {
+    position: absolute;
+    color: #ff8fc7;
+    font-size: 20px;
+    animation: subir 5s linear forwards;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) scale(.7);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg) scale(1.4);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="galaxia" id="galaxia">
+
+    <div class="planeta"></div>
+    <div class="anillo"></div>
+
+    <div class="contenido">
+        <h1>🌌 Para el amor de mi vida 💙</h1>
+
+        <div id="mensaje">
+            Creo en ti 🥹✨
+        </div>
+
+        <button onclick="cambiarMensaje()">
+            💕 Toca aquí
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+const galaxia = document.getElementById("galaxia");
+
+const mensajes = [
+    "Creo en ti 🥹💙",
+    "Siempre voy a estar orgullosa de ti ✨",
+    "Tú puedes lograr todo lo que te propongas 🌟",
+    "No olvides lo increíble que eres 🫶",
+    "Confío en ti incluso cuando tú dudes de ti mismo 💙",
+    "Quiero verte cumplir todos tus sueños 🌙",
+    "Eres una persona muy especial para mí ❤️",
+    "Nunca dejes de luchar por lo que quieres ✨",
+    "Yo siempre voy a creer en ti 🥹",
+    "Te quiero muchísimo, mi bebé 💕"
+];
+
+let numero = 0;
+
+function cambiarMensaje() {
+
+    numero++;
+
+    if (numero >= mensajes.length) {
+        numero = 0;
+    }
+
+    document.getElementById("mensaje").innerText =
+        mensajes[numero];
+
+    crearCorazones();
+}
+
+function crearEstrellas() {
+
+    for (let i = 0; i < 180; i++) {
+
+        const estrella = document.createElement("div");
+
+        estrella.classList.add("estrella");
+
+        estrella.style.left =
+            Math.random() * 100 + "%";
+
+        estrella.style.top =
+            Math.random() * 100 + "%";
+
+        estrella.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        galaxia.appendChild(estrella);
+    }
+}
+
+function crearCorazones() {
+
+    for (let i = 0; i < 8; i++) {
+
+        const corazon = document.createElement("div");
+
+        corazon.classList.add("corazon");
+
+        corazon.innerText = "💙";
+
+        corazon.style.left =
+            Math.random() * 100 + "%";
+
+        corazon.style.bottom = "0";
+
+        corazon.style.animationDuration =
+            (3 + Math.random() * 3) + "s";
+
+        galaxia.appendChild(corazon);
+
+        setTimeout(() => {
+            corazon.remove();
+        }, 6000);
+    }
+}
+
+crearEstrellas();
+
+setInterval(crearCorazones, 3500);
+
+</script>
+
+</body>
+  </html>
